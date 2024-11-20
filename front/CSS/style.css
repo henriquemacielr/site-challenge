@@ -1,0 +1,346 @@
+*{
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+body{
+    display:flex;
+    flex-direction: column;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    background-color: rgb(191, 227, 236);
+}
+
+h2{
+    text-align: center;
+    color:#84d4fc;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(238, 187, 187);
+    height: 60px;
+    align-items: center;
+}
+
+.menu{
+    color:#fcdc7c;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.help{
+    color:greenyellow;
+    display: flex;
+    gap: 40px;
+}
+
+.buttons--helper{
+    color:greenyellow;
+    display: flex;
+    gap: 10px;
+}
+
+.create{
+    color:green;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+
+}
+.text-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.text-content {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+img{
+    
+    height: auto;
+    max-width: 80%;
+    object-fit: cover;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+
+.text-container {
+    max-width: 80%;
+    margin: 0 auto;
+
+}
+h1{
+    color:#84d4fc;
+    font-size: 70px;
+    text-align: center;
+}
+
+ul{
+    font-size: 30px;
+    color: white;
+    
+}
+
+p{
+    font-size: 30px;
+    color: white;
+    
+}
+
+span{
+    color: #fcdc7c;
+}
+
+.text-02 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.text-02 h2 {
+    font-size: 40px;
+    color: #fcdc7c;
+}
+
+.text-02 p {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+footer{
+    color: #84d4fc;
+    background-color: rgb(238, 187, 187);
+    text-align: center;
+}
+
+
+
+.prop{
+    text-align: center;
+    color: aliceblue;
+    direction: "right";
+    
+}
+
+.slider{
+    margin: 0 auto;
+    width: 1000px;
+    height: 500px;
+    overflow: hidden;
+    border: 5px solid #FFF;
+
+}
+
+.slides{
+    width: 450%;
+    height: 500px;
+    display: flex;
+}
+
+.slides input {
+    display: none;
+}
+
+.slide{
+    width: 25%;
+    position: relative;
+    transition: 2s;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%; /* Garante que a imagem ocupe toda a altura do slide */
+    object-fit: cover; 
+}
+
+.radio-btn{
+    align-self: center;
+}
+
+.manual-navigation{
+    position: absolute;
+    width: 1000px;
+    margin-top: -30px;
+    display: flex;
+    justify-content: center;
+    background: none;
+}
+
+.manual-btn{
+    border: 2px solid #FFF;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.manual-btn:not(last-child){
+    margin-right: 50px;
+}
+
+.manual-btn:hover{
+    background-color: #FFF;
+}
+
+#radio1:checked ~ .first{
+    margin: 0px;
+}
+
+#radio2:checked ~ .first{
+    margin-left: -25%;
+}
+
+#radio3:checked ~ .first{
+    margin-left: -50%;
+}
+
+#radio4:checked ~ .first{
+    margin-left: -75%;
+}
+
+.navigation-auto div {
+    border: 2px solid #FFF;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.navigation-auto{
+    position: absolute;
+    width: 1000px;
+    margin-top: 470px;  
+    display: flex;
+    justify-content: center;
+    background: none;
+    margin-left: -25px;
+}
+
+.navigation-auto div:not(:last-child){
+    margin-right: 50px;
+    
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1{
+    background-color: #FFF;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn2{
+    background-color: #FFF;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn3{
+    background-color: #FFF;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn4{
+    background-color: #FFF;
+}
+#buger{
+    width: 50px;
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.container--modal{
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fcdc7c;
+    height: 120%;
+    width: 25%;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+}
+
+a{
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
+}
+
+#x{
+    width: 30px;
+    position: relative;
+    top: 20px;
+    left: 15px;
+    cursor: pointer;
+
+}
+
+.call-to-action {
+    text-align: center;
+    margin: 50px 0;
+  }
+  
+  /* Texto principal */
+  .cta-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Botão estilizado */
+  .cta-button {
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF; /* Azul chamativo */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Efeito ao passar o mouse */
+  .cta-button:hover {
+    background-color: #0056b3; /* Azul mais escuro */
+  }

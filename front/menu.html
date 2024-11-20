@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <script src="./js/script.js" defer></script>
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url("https://cloudfront-us-east-1.images.arcpublishing.com/estadao/PU3KNJZYIFKJBHZFH4WRRYEF24.jpg");
+            background-size: cover; /* Para cobrir toda a tela */
+            background-position: center; /* Para centralizar a imagem */
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            border-color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Estilo para o container dos toasts */
+        #toastContainer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Estilo padrão para os toasts */
+        .toast {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease, fadeOut 0.5s 2.5s ease forwards;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Animação para o toast aparecer */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Animação para o toast desaparecer */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Estilo para erro */
+        .toast.error {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Formulário de Cadastro</h2>
+<form id="formCadastro">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+    <div id="errorNome" class="error-message"></div>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Digite seu email">
+    <div id="errorEmail" class="error-message"></div>
+
+    <label for="telefone">Telefone:</label>
+    <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone">
+    <div id="errorTelefone" class="error-message"></div>
+
+    <input type="submit" value="Cadastrar">
+    <div id="successMessage" class="success-message"></div>
+</form>
+
+<!-- Contêiner para os toasts -->
+<div id="toastContainer"></div>
+
+<script>
+// Função para mostrar os toasts
+function showToast(message, type = "success") {
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`; // Adiciona a classe com base no tipo
+    toast.textContent = message;
+
+    // Adiciona o toast ao contêiner
+    const container = document.getElementById("toastContainer");
+    container.appendChild(toast);
+
+    // Remove o toast após 3 segundos
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+document.getElementById("formCadastro").addEventListener("submit", function (event) {
+    event.preventDefault(); // Impede o envio do formulário
+    let valid = true;
+    let missingField = "";
+
+    // Limpa as mensagens de erro e sucesso
+    clearErrors();
+
+    // Valida o campo nome
+    const nome = document.getElementById("nome");
+    if (nome.value.trim() === "") {
+        showError(nome, "O nome é obrigatório.");
+        missingField = "nome";
+        valid = false;
+    }
+
+    // Valida o campo email
+    const email = document.getElementById("email");
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (email.value.trim() === "") {
+        showError(email, "O email é obrigatório.");
+        missingField = "email";
+        valid = false;
+    } else if (!emailPattern.test(email.value)) {
+        showError(email, "Por favor, insira um email válido.");
+        missingField = "email";
+        valid = false;
+    }
+
+    // Valida o campo telefone
+    const telefone = document.getElementById("telefone");
+    if (telefone.value.trim() === "") {
+        showError(telefone, "O telefone é obrigatório.");
+        missingField = "telefone";
+        valid = false;
+    }
+
+    // Exibe a mensagem de sucesso ou erro
+    if (valid) {
+        showToast("Link de formulário enviado com sucesso!", "success");
+        document.getElementById("formCadastro").reset(); // Limpa o formulário
+    } else {
+        showToast(`Impossível de enviar sem o(a) ${missingField}`, "error");
+    }
+});
+
+// Função para mostrar erro
+function showError(element, message) {
+    element.classList.add("error");
+    const errorMessageElement = document.getElementById("error" + element.id.charAt(0).toUpperCase() + element.id.slice(1));
+    errorMessageElement.textContent = message;
+}
+
+// Função para limpar mensagens de erro
+function clearErrors() {
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.classList.remove("error");
+    });
+    const errorMessages = document.querySelectorAll(".error-message");
+    errorMessages.forEach(message => {
+        message.textContent = "";
+    });
+}
+</script>
+
+</body>
+</html>
